@@ -74,7 +74,7 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: var(--dark-text);
         }
-        
+
         /* Apply accent color to main section headings */
         h2.main-heading {
             color: var(--accent-color);
@@ -125,6 +125,45 @@
 
         a.company-link:hover {
             color: var(--dark-text);
+        }
+
+        /* Modal specific styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            color: var(--dark-text);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -191,8 +230,8 @@
 
     <main class="pt-20">
         <!-- Home Section -->
-        <section id="home" class="py-12 md:py-20 px-4 md:px-8">
-            <div class="container mx-auto">
+        <section id="home" class="min-h-screen flex items-center justify-center">
+            <div class="container mx-auto p-4 md:p-8">
                 <div class="md:grid md:grid-cols-2 md:gap-8 items-center">
                     <div class="text-center md:text-left mb-6 md:mb-0">
                         <h2 class="text-4xl md:text-6xl font-extrabold text-[--dark-text] mb-2">Hello, I'm Meng</h2>
@@ -204,7 +243,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center md:justify-end">
-                        <img src="https://placehold.co/300x300/d1d5db/000000?text=Meng" alt="Profile Picture"
+                        <img src="assets\profile_dp.jpeg" alt="Profile Picture"
                             class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover">
                     </div>
                 </div>
@@ -246,28 +285,45 @@
                 <div class="bg-[--white] rounded-lg shadow-md p-6">
                     <div class="md:grid md:grid-cols-3 md:gap-8 space-y-8 md:space-y-0">
                         <div class="p-6 text-[--medium-text]">
-                            <h3 class="text-xl font-bold mb-4 text-[--dark-text]">Engineering & Design</h3>
+                            <h3 class="text-xl font-bold mb-4 text-[--dark-text]">Business & Strategy</h3>
                             <ul class="list-disc list-inside text-left space-y-2">
-                                <li>HTML, CSS, JavaScript</li>
-                                <li>React</li>
-                                <li>Figma, Canva</li>
+                                <li>Agile / Scrum / Kanban</li>
+                                <li>Stakeholder Management</li>
+                                <li>Change & Release Management</li>
+                                <li>Full Cycle Product Delivery</li>
+                                <li>Solution Design</li>
+                                <li>User Stories</li>
+                                <li>User Accpetance Testing (UAT)</li>
+                            </ul>
+                        </div>                        
+                        <div class="p-6 text-[--medium-text]">
+                            <h3 class="text-xl font-bold mb-4 text-[--dark-text]">Engineering</h3>
+                            <ul class="list-disc list-inside text-left space-y-2">
+                                <li>Software Development Life Cycle (SDLC)</li>
+                                <li>Git</li>
+                                <li>CICD, AWS, Iac</li>
+                                <li>Elixir</li>
+                                <li>JavaScript, TypeScript, React</li>
+                                <li>Python</li>
+                                <li>APIs</li>
+                                <li>User Experience, User Interface (UX/UI)</li>
+
                             </ul>
                         </div>
                         <div class="p-6 text-[--medium-text]">
                             <h3 class="text-xl font-bold mb-4 text-[--dark-text]">Technology</h3>
                             <ul class="list-disc list-inside text-left space-y-2">
-                                <li>Elixir, Node.js, Python, SQL</li>
-                                <li>AWS, Snowflake, DBT</li>
-                                <li>CI/CD, IaC, Docker</li>
-                            </ul>
-                        </div>
-                        <div class="p-6 text-[--medium-text]">
-                            <h3 class="text-xl font-bold mb-4 text-[--dark-text]">Business & Strategy</h3>
-                            <ul class="list-disc list-inside text-left space-y-2">
+                                <li>DevSecOps (IAM/RBAC)</li>
+                                <li>Snowflake</li>
+                                <li>DBT</li>
+                                <li>Fivetran</li>
+                                <li>Jira</li>
+                                <li>Canva</li>
                                 <li>Miro</li>
-                                <li>Looker</li>
+                                <li>Figma</li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -284,78 +340,101 @@
                             <div>
                                 <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Professional Experience</h3>
                                 <div class="space-y-12">
-                                    <div class="border-b border-gray-400 pb-12">
-                                        <h4 class="text-lg font-bold text-[--dark-text]">
-                                            Data Engineer @ <a href="https://www.pexa.com.au/" target="_blank"
-                                                rel="noopener noreferrer" class="company-link">PEXA</a>
-                                        </h4>
-                                        <p class="text-sm text-[--medium-text]">May 2023 - Current</p>
-                                        <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
-                                            <li>I drove end-to-end product delivery by bridging the gap between business
-                                                strategy and technical execution.</li>
-                                            <li>I led the development of scalable platforms and consistently optimized team
-                                                performance, most notably by increasing delivery velocity by 80% and
-                                                ensuring new products directly met business objectives.</li>
-                                            <li>I focused on building more efficient and reliable processes by mentoring
-                                                teams, mitigating risk through automation, and implementing innovative solutions
-                                                that accelerated our time-to-market.</li>
-                                            <li>I contributed significantly to the continuous improvement of the codebase by
-                                                writing and testing new features, and enhancing existing functionalities
-                                                with a focus on performance and readability.</li>
-                                        </ul>
+                                    <div
+                                        class="border-b border-gray-400 pb-12 flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8">
+                                        <div class="flex-shrink-0">
+                                            <!-- Replace the src attribute below with your PEXA logo asset path -->
+                                            <img src="assets\pexa_logo.png"
+                                                alt="PEXA Logo" class="w-40 h-40 rounded-lg object-cover">
+                                        </div>
+                                        <div class="flex-grow">
+                                            <h4 class="text-lg font-bold text-[--dark-text]">
+                                                Data Engineer @ <a href="https://www.pexa.com.au/" target="_blank"
+                                                    rel="noopener noreferrer" class="company-link">PEXA</a>
+                                            </h4>
+                                            <p class="text-sm text-[--medium-text]">May 2023 - Current</p>
+                                            <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
+                                                <li>I drove end-to-end product delivery by bridging the gap between business
+                                                    strategy and technical execution.</li>
+                                            </ul>
+                                            <div class="mt-4 text-left ml-6 text-[--medium-text]">...</div>
+                                            <span data-job-id="pexa-data-engineer"
+                                                class="ml-6 mt-1 inline-block text-[--accent-color] underline cursor-pointer hover:no-underline learn-more-text">Learn
+                                                More</span>
+                                        </div>
                                     </div>
-                                    <div class="border-b border-gray-400 pb-12">
-                                        <h4 class="text-lg font-bold text-[--dark-text]">
-                                            Software Engineer, Data @ <a href="https://www.pexa.com.au/" target="_blank"
-                                                rel="noopener noreferrer" class="company-link">PEXA</a>
-                                        </h4>
-                                        <p class="text-sm text-[--medium-text]">Aug 2022 - May 2023</p>
-                                        <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
-                                            <li>I accelerated the team's growth and output by mentoring junior engineers
-                                                with frequently targeted technical and business-context feedback.</li>
-                                            <li>I enabled the team to build and iterate faster using DRY principles by
-                                                introducing Storybook to streamlike UI component building and testing.</li>
-                                            <li>I collaborated with cross-functional teams to integrate data pipelines and
-                                                develop new features, ensuring seamless data flow and product functionality.
-                                            </li>
-                                        </ul>
+                                    <div
+                                        class="border-b border-gray-400 pb-12 flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8">
+                                        <div class="flex-shrink-0">
+                                            <!-- Replace the src attribute below with your PEXA logo asset path -->
+                                            <img src="assets\pexa_logo.png"
+                                                alt="PEXA Logo" class="w-40 h-40 rounded-lg object-cover">
+                                        </div>
+                                        <div class="flex-grow">
+                                            <h4 class="text-lg font-bold text-[--dark-text]">
+                                                Software Engineer, Data @ <a href="https://www.pexa.com.au/" target="_blank"
+                                                    rel="noopener noreferrer" class="company-link">PEXA</a>
+                                            </h4>
+                                            <p class="text-sm text-[--medium-text]">Aug 2022 - May 2023</p>
+                                            <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
+                                                <li>I accelerated the team's growth and output by mentoring junior engineers
+                                                    with frequently targeted technical and business-context feedback.</li>
+                                            </ul>
+                                            <div class="mt-4 text-left ml-6 text-[--medium-text]">...</div>
+                                            <span data-job-id="pexa-software-engineer"
+                                                class="ml-6 mt-1 inline-block text-[--accent-color] underline cursor-pointer hover:no-underline learn-more-text">Learn
+                                                More</span>
+                                        </div>
                                     </div>
-                                    <div class="border-b border-gray-400 pb-12">
-                                        <h4 class="text-lg font-bold text-[--dark-text]">
-                                            Product Engineer @ <a href="https://matrak.com/" target="_blank"
-                                                rel="noopener noreferrer" class="company-link">Matrak</a>
-                                        </h4>
-                                        <p class="text-sm text-[--medium-text]">Oct 2021 - Aug 2023</p>
-                                        <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
-                                            <li>I enabled a new revenue stream by leading the end-to-end development of
-                                                Matrak's first public-facing API suite, from defining business requirements to
-                                                launch.</li>
-                                            <li>I enhanced the user experience, by collaborating with UX team using a
-                                                data-driven approach with user journey heatmaps.</li>
-                                            <li>I facilitated Agile ceremonies to provide the C-suite with clear,
-                                                data-driven insights and ensure predictable project velocity.</li>
-                                        </ul>
+                                    <div
+                                        class="border-b border-gray-400 pb-12 flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8">
+                                        <div class="flex-shrink-0">
+                                            <!-- Replace the src attribute below with your Matrak logo asset path -->
+                                            <img src="assets\matrak_logo.png"
+                                                alt="Matrak Logo" class="w-40 h-40 rounded-lg object-cover">
+                                        </div>
+                                        <div class="flex-grow">
+                                            <h4 class="text-lg font-bold text-[--dark-text]">
+                                                Product Engineer @ <a href="https://matrak.com/" target="_blank"
+                                                    rel="noopener noreferrer" class="company-link">Matrak</a>
+                                            </h4>
+                                            <p class="text-sm text-[--medium-text]">Oct 2021 - Aug 2023</p>
+                                            <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
+                                                <li>I enabled a new revenue stream by leading the end-to-end development of
+                                                    Matrak's first public-facing API suite, from defining business requirements to
+                                                    launch.</li>
+                                            </ul>
+                                            <div class="mt-4 text-left ml-6 text-[--medium-text]">...</div>
+                                            <span data-job-id="matrak"
+                                                class="ml-6 mt-1 inline-block text-[--accent-color] underline cursor-pointer hover:no-underline learn-more-text">Learn
+                                                More</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 class="text-lg font-bold text-[--dark-text]">
-                                            Software Engineer @ <a href="https://www.xplortechnologies.com/" target="_blank"
-                                                rel="noopener noreferrer" class="company-link">Xplor</a>
-                                        </h4>
-                                        <p class="text-sm text-[--medium-text]">Oct 2018 - Oct 2021</p>
-                                        <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
-                                            <li>I delivered three core revenue-generating product suites that drove
-                                                significant customer growth, from startup to scale-up.</li>
-                                            <li>I directly contributed to enhancing the customer experience, reducing
-                                                support resolution time by 93%—from 30 days to less than 2, by building internal
-                                                APIs and upskilling the customer support teams.</li>
-                                            <li>I contributed significantly ensuring consistent brand alignment and user
-                                                experience, by collaborating with the product team to build an internal
-                                                design system from scratch.</li>
-                                        </ul>
+                                    <div class="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-8">
+                                        <div class="flex-shrink-0">
+                                            <!-- Replace the src attribute below with your Xplor logo asset path -->
+                                            <img src="assets\xplor_logo.jpeg"
+                                                alt="Xplor Logo" class="w-40 h-40 rounded-lg object-cover">
+                                        </div>
+                                        <div class="flex-grow">
+                                            <h4 class="text-lg font-bold text-[--dark-text]">
+                                                Software Engineer @ <a href="https://www.xplortechnologies.com/"
+                                                    target="_blank" rel="noopener noreferrer" class="company-link">Xplor</a>
+                                            </h4>
+                                            <p class="text-sm text-[--medium-text]">Oct 2018 - Oct 2021</p>
+                                            <ul class="list-disc list-inside mt-2 text-[--dark-text] ml-6">
+                                                <li>I delivered three core revenue-generating product suites that drove
+                                                    significant customer growth, from startup to scale-up.</li>
+                                            </ul>
+                                            <div class="mt-4 text-left ml-6 text-[--medium-text]">...</div>
+                                            <span data-job-id="xplor"
+                                                class="ml-6 mt-1 inline-block text-[--accent-color] underline cursor-pointer hover:no-underline learn-more-text">Learn
+                                                More</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Initiatives Section -->
                             <div>
                                 <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Projects & Initiatives</h3>
@@ -365,7 +444,8 @@
                                                 href="https://csinschools.io/" target="_blank" rel="noopener noreferrer"
                                                 class="company-link">CSinSchools</a></h4>
                                         <p class="text-sm text-[--medium-text]">Jan 2020 - Jun 2020</p>
-                                        <p class="mt-2 text-[--dark-text]">I partnered with CSinSchools to mentor and upskill educators in coding
+                                        <p class="mt-2 text-[--dark-text]">I partnered with CSinSchools to mentor and
+                                            upskill educators in coding
                                             fundamentals, while also teaching programming fundamentals to Year 7 and 8
                                             students for two terms. I used gamification to increase student engagement and
                                             drive tangible learning outcomes.</p>
@@ -376,7 +456,8 @@
                                                 rel="noopener noreferrer" class="company-link">HypeNation AU</a>
                                         </h4>
                                         <p class="text-sm text-[--medium-text]">2020</p>
-                                        <p class="mt-2 text-[--dark-text]">I Drove a significant increase in conversions and revenue by automating a
+                                        <p class="mt-2 text-[--dark-text]">I Drove a significant increase in conversions and
+                                            revenue by automating a
                                             Shopify discount system and redesigning the landing page using Liquid.</p>
                                     </div>
                                     <div class="text-[--medium-text]">
@@ -385,7 +466,8 @@
                                                 class="company-link">Orbit Coffee AU</a>
                                         </h4>
                                         <p class="text-sm text-[--medium-text]">2020</p>
-                                        <p class="mt-2 text-[--dark-text]">I enhanced UX and UI to align brand consistency by developing custom code
+                                        <p class="mt-2 text-[--dark-text]">I enhanced UX and UI to align brand consistency
+                                            by developing custom code
                                             solutions for various front-end Squarespace components.</p>
                                     </div>
                                 </div>
@@ -394,7 +476,7 @@
                     </div>
                 </div>
             </section>
-        
+
         <!-- Education Section -->
         <section id="education" class="py-16 px-4 md:px-8">
             <div class="container mx-auto">
@@ -414,7 +496,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Contact Section -->
         <section id="contact" class="py-16 px-4 md:px-8">
             <div class="container mx-auto text-center">
@@ -429,6 +511,16 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal for Detailed Information -->
+    <div id="info-modal" class="modal hidden fixed inset-0 overflow-y-auto z-50 transition-opacity">
+        <div class="modal-content relative rounded-lg shadow-xl p-8 max-w-xl mx-auto my-12">
+            <button
+                class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-2xl font-bold close-btn">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4 text-[--dark-text]"></h3>
+            <div id="modal-content" class="text-[--medium-text]"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-[--footer-bg] text-white text-center py-6 mt-8 shadow-inner">
@@ -489,6 +581,89 @@
                 localStorage.setItem('theme', 'light');
             }
             updateIconVisibility();
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('info-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeBtn = modal.querySelector('.close-btn');
+        const learnMoreTexts = document.querySelectorAll('.learn-more-text');
+
+        const jobDetails = {
+            'pexa-data-engineer': {
+                title: 'Data Engineer at PEXA',
+                items: [
+                    'I drove end-to-end product delivery by bridging the gap between business strategy and technical execution.',
+                    'I led the development of scalable platforms and consistently optimized team performance, most notably by increasing delivery velocity by 80% and ensuring new products directly met business objectives.',
+                    'I focused on building more efficient and reliable processes by mentoring teams, mitigating risk through automation, and implementing innovative solutions that accelerated our time-to-market.',
+                    'I contributed significantly to the continuous improvement of the codebase by writing and testing new features, and enhancing existing functionalities with a focus on performance and readability.'
+                ]
+            },
+            'pexa-software-engineer': {
+                title: 'Software Engineer, Data at PEXA',
+                items: [
+                    'I accelerated the team\'s growth and output by mentoring junior engineers with frequently targeted technical and business-context feedback.',
+                    'I enabled the team to build and iterate faster using DRY principles by introducing Storybook to streamlike UI component building and testing.',
+                    'I collaborated with cross-functional teams to integrate data pipelines and develop new features, ensuring seamless data flow and product functionality.'
+                ]
+            },
+            'matrak': {
+                title: 'Product Engineer at Matrak',
+                items: [
+                    'I enabled a new revenue stream by leading the end-to-end development of Matrak\'s first public-facing API suite, from defining business requirements to launch.',
+                    'I enhanced the user experience, by collaborating with UX team using a data-driven approach with user journey heatmaps.',
+                    'I facilitated Agile ceremonies to provide the C-suite with clear, data-driven insights and ensure predictable project velocity.'
+                ]
+            },
+            'xplor': {
+                title: 'Software Engineer at Xplor',
+                items: [
+                    'I delivered three core revenue-generating product suites that drove significant customer growth, from startup to scale-up.',
+                    'I directly contributed to enhancing the customer experience, reducing support resolution time by 93%—from 30 days to less than 2, by building internal APIs and upskilling the customer support teams.',
+                    'I contributed significantly ensuring consistent brand alignment and user experience, by collaborating with the product team to build an internal design system from scratch.'
+                ]
+            }
+        };
+
+        learnMoreTexts.forEach(span => {
+            span.addEventListener('click', () => {
+                const jobId = span.dataset.jobId;
+                const details = jobDetails[jobId];
+                if (details) {
+                    modalTitle.textContent = details.title;
+                    
+                    // Clear previous content
+                    modalContent.innerHTML = '';
+                    
+                    // Create and append new list items
+                    const ul = document.createElement('ul');
+                    ul.className = 'list-disc list-inside mt-2 space-y-2';
+                    details.items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        ul.appendChild(li);
+                    });
+                    modalContent.appendChild(ul);
+
+                    modal.classList.remove('hidden');
+                    // Add the active class to trigger the opacity transition
+                    setTimeout(() => modal.classList.add('active'), 10);
+                }
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            // Hide the modal completely after the transition
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
         });
     </script>
 </body>
