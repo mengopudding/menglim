@@ -17,15 +17,16 @@
             --light-bg: #F5F5F5;
             --white: #FFFFFF;
             --light-gray: #EAEAEA;
-            --dark-text: #374151;
+            --dark-text: #333333;
             --medium-text: #6B7280;
             --pure-black: #000000;
             --nav-bg: var(--white);
             --nav-text: #6B7280;
-            --nav-text-hover: #374151;
-            --nav-brand: #374151;
+            --nav-text-hover: #333333;
+            --nav-brand: #333333;
             --link-color: #3b82f6;
             --link-hover: #4B5563;
+            --footer-bg: #333333;
         }
 
         body.dark {
@@ -42,10 +43,11 @@
             /* Matching dark text for better contrast */
             --nav-text-hover: #E2E8F0;
             --nav-brand: var(--dark-text);
-            --link-color: #ff9a48;
-            /* Orange for company links */
-            --link-hover: #ff8c2b;
-            /* Slightly darker orange on hover */
+            --link-color: #ff5757;
+            /* New red-pink color */
+            --link-hover: #E04E4E;
+            /* Slightly darker red on hover */
+            --footer-bg: var(--nav-bg);
         }
 
         body {
@@ -84,15 +86,15 @@
 
         .custom-btn {
             /* Button color is now a professional dark gray */
-            background-color: #374151;
+            background-color: #333333;
             color: #FFFFFF;
             /* White text for better readability */
             transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         body.dark .custom-btn {
-            background-color: #ff9a48;
-            /* Orange color from user's hex code */
+            background-color: #ff5757;
+            /* New red-pink color */
             color: #FFFFFF;
         }
 
@@ -104,8 +106,8 @@
         }
 
         body.dark .custom-btn:hover {
-            background-color: #ff8c2b;
-            /* Slightly darker orange on hover */
+            background-color: #E04E4E;
+            /* Slightly darker red on hover */
         }
 
         /* Custom, more aggressive shadow for content cards */
@@ -141,8 +143,8 @@
                 <button id="theme-toggle"
                     class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
                     <!-- Simpler Sun SVG -->
-                    <svg id="sun-icon" class="w-6 h-6 text-yellow-500" fill="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="sun-icon" class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="5" />
                         <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" stroke-width="2" />
                         <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="2" />
@@ -154,10 +156,9 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" />
                     </svg>
                     <!-- Simpler Moon SVG -->
-                    <svg id="moon-icon" class="w-6 h-6 text-gray-400" fill="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M19.68 15.65a9 9 0 01-10.16 3.82 9.01 9.01 0 01-1.37-14.71 10.5 10.5 0 0011.53 10.89z" />
+                    <svg id="moon-icon" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.68 15.65a9 9 0 01-10.16 3.82 9.01 9.01 0 01-1.37-14.71 10.5 10.5 0 0011.53 10.89z" />
                     </svg>
                 </button>
                 <a href="#home" class="navbar-link transition duration-300 font-bold">Home</a>
@@ -416,7 +417,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 dark:bg-[--nav-bg] text-white text-center py-6 mt-8 shadow-inner">
+    <footer class="bg-[--footer-bg] text-white text-center py-6 mt-8 shadow-inner">
         <p>&copy; 2025 Meng Lim. All rights reserved.</p>
     </footer>
 
