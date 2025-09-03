@@ -1,0 +1,31 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 960px;
+}
+
+.section-padding {
+    padding: 4rem 1rem;
+}
+
+.navbar-link {
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-link:hover {
+    color: #4a5568;
+}
+
+.custom-btn {
+    background-color: #FDBA74; /* A soft pastel orange */
+    color: #4A4A4A;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.custom-btn:hover {
+    background-color: #FB923C; /* A slightly darker orange on hover */
+}
