@@ -1,166 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meng Lim</title>
     <!-- Link to the Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <!-- Link to the Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Inline your custom CSS -->
+    <style>
+        :root {
+            /* Vibrant theme palette */
+            --light-bg: #F0F4F8;
+            --white: #FFFFFF;
+            --light-gray: #EBEFF5;
+            --dark-text: #374151;
+            --medium-text: #6B7280;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            text-align: left;
+        }
+        /* New rule for headings */
+        h1, h2, h3, h4 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--dark-text);
+        }
+        
+        .container {
+            max-width: 960px;
+        }
+
+        .section-padding {
+            padding: 4rem 1rem;
+        }
+
+        .navbar-link {
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar-link:hover {
+            color: #4a5568;
+        }
+
+        .custom-btn {
+            /* Button color is now a professional dark gray */
+            background-color: #374151;
+            color: #FFFFFF; /* White text for better readability */
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .custom-btn:hover {
+            /* A slightly darker gray on hover */
+            background-color: #1F2937;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Custom, more aggressive shadow for content cards */
+        .card-shadow {
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Style for company links, now with a professional hover effect */
+        a.company-link {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
+        a.company-link:hover {
+            color: #4B5563; /* New hover color to match the button */
+        }
+        
+
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 leading-relaxed">
+
+<body class="bg-[--light-bg] text-gray-800 leading-relaxed">
 
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md fixed top-0 w-full z-10">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#home" class="text-xl font-bold text-blue-600">My Portfolio</a>
+    <nav class="bg-gray-800 shadow-md fixed top-0 w-full z-10">
+        <div class="container mx-auto px-4 py-4 flex flex-col items-center md:flex-row md:justify-between">
+            <a href="#home" class="text-2xl md:text-3xl font-extrabold text-white mb-2 md:mb-0">MENG LIM</a>
             <div class="hidden md:flex space-x-6">
-                <a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About</a>
-                <a href="#resume" class="text-gray-600 hover:text-blue-600 transition duration-300">Resume</a>
+                <a href="#home" class="text-gray-200 hover:text-white transition duration-300 font-bold">Home</a>
+                <a href="#about" class="text-gray-200 hover:text-white transition duration-300 font-bold">About</a>
+                <a href="#resume" class="text-gray-200 hover:text-white transition duration-300 font-bold">Resume</a>
+                <a href="#contact" class="text-gray-200 hover:text-white transition duration-300 font-bold">LinkedIn</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="menu-button" class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            <button id="menu-button" class="md:hidden text-gray-200 hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
                 </svg>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
-            <a href="#home" class="block py-3 px-4 text-gray-600 hover:bg-gray-100">Home</a>
-            <a href="#about" class="block py-3 px-4 text-gray-600 hover:bg-gray-100">About</a>
-            <a href="#resume" class="block py-3 px-4 text-gray-600 hover:bg-gray-100">Resume</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-lg text-center">
+            <a href="#home" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">Home</a>
+            <a href="#about" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">About</a>
+            <a href="#resume" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">Resume</a>
+            <a href="#contact" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">LinkedIn</a>
         </div>
     </nav>
 
     <main class="pt-20">
         <!-- Home Section -->
-        <section id="home" class="section-padding bg-white text-center rounded-xl shadow-lg m-4">
-            <div class="container mx-auto">
-                <img src="assets\profile_dp.jpeg" alt="Profile Picture" class="w-36 h-36 rounded-full mx-auto mb-6 border-4 border-blue-400 object-cover">
-                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-2">Hello, I'm Meng</h2>
-                <p class="text-lg text-gray-600">I've been a Software and Data Engineer, I'm now focusing on leveraging my technical background as a Technical Product Owner to deliver real tangible value</p>
-            </div>
-        </section>
+        <div class="bg-[--white] rounded-xl card-shadow m-4 p-8">
+            <section id="home" class="flex flex-col justify-center items-center text-center py-12 md:py-20">
+                <div class="container mx-auto">
+                    <img src="https://placehold.co/150x150/d1d5db/000000?text=Meng" alt="Profile Picture"
+                        class="w-36 h-36 rounded-full mx-auto mb-6 object-cover">
+                    <h2 class="text-4xl md:text-6xl font-extrabold text-[--dark-text] mb-2">Hello, I'm Meng</h2>
+                    <div class="mt-4 max-w-xl mx-auto p-6 rounded-lg">
+                        <p class="text-lg text-gray-600">Drawing on my background in software and data, I'm passionate
+                            about collaborating with teams as a Technical Product Owner to tackle real-world problems
+                            and build products that truly matter.</p>
+                    </div>
+                    <a href="#about"
+                        class="inline-block mt-8 px-8 py-3 custom-btn rounded-full font-semibold shadow-md hover:shadow-lg transition-transform transform hover:scale-105">Learn
+                        More About Me</a>
+                </div>
+            </section>
+        </div>
 
         <!-- About Section -->
-        <section id="about" class="section-padding bg-gray-50 rounded-xl shadow-lg m-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">About Me</h2>
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
-                        <h3 class="text-xl font-bold mb-2">Who I Am </h3>
-                        <h5>9-5</h5>
-                        <p class="text-gray-700">I am a full-stack developer with a passion for creating beautiful and functional web applications. I have experience with JavaScript, React, Node.js, and modern CSS frameworks. My goal is to build accessible and user-friendly products that solve real-world problems.</p>
-                        <h5>5-9</h5>
-                        <p>
-                            <li>Judoka</li> 
-                            <li>Currently building a fitwear brand</li>
-                            <li>Foodie that also loves to cook</li>
-                        </p>
-                    </div>
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
-                        <h3 class="text-xl font-bold mb-2">Stack</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li><strong>Frontend:</strong> HTML, CSS, JavaScript, React</li>
-                            <li><strong>Backend:</strong> Elixir, Node.js, Python, SQL</li>
-                            <li><strong>Cloud/Infra:</strong> AWS, CI/CD, Iac, Docker</li>
-                            <li><strong>SaaS:</strong> AWS, Snowflake, DBT, Canva, Figma, Miro</li>
-                            <p>Advocate for leveraging AI toolings</p>
-                        
-                        </ul>
+        <div class="bg-[--white] rounded-xl card-shadow m-4 p-8">
+            <section id="about" class="pt-16">
+                <div class="container mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-[--dark-text]">About Me</h2>
+                    <div class="space-y-8">
+                        <!-- 9am-5pm Section -->
+                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-2">9am-5pm</h3>
+                            <p class="text-[--medium-text]">I am a full-stack developer with a passion for creating beautiful
+                                and functional web applications. I have experience with JavaScript, React, Node.js, and
+                                modern CSS frameworks. My goal is to build accessible and user-friendly products that
+                                solve real-world problems.</p>
+                        </div>
+                        <!-- 5pm-9pm Section -->
+                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-2">5pm-9pm</h3>
+                            <ul class="list-disc list-inside space-y-2 text-[--medium-text]">
+                                <li class="dot-red">Currently building a fitwear brand🏋🏽</li>
+                                <li class="dot-orange">Foodie that also loves to cook 🍣</li>
+                                <li class="dot-green">Always down for a camping trip 🔥</li>
+                                <li class="dot-blue">Judoka 🥋</li>
+                            </ul>
+                        </div>
+                        <!-- Stack Section -->
+                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-bold mb-2">Stack</h3>
+                            <ul class="list-disc list-inside space-y-2 text-[--medium-text]">
+                                <li class="dot-teal"><strong>Frontend:</strong> HTML, CSS, JavaScript, React</li>
+                                <li class="dot-dark-blue"><strong>Backend:</strong> Elixir, Node.js, Python, SQL</li>
+                                <li class="dot-purple"><strong>Cloud/Infra:</strong> AWS, CI/CD, Iac, Docker</li>
+                                <li class="dot-lime"><strong>SaaS:</strong> AWS, Snowflake, DBT, Canva, Figma, Miro, Looker</li>
+                            </ul>
+                            <p class="mt-2 text-[--medium-text]">Advocate for leveraging AI toolings</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <!-- Resume Section -->
-        <section id="resume" class="section-padding bg-white rounded-xl shadow-lg m-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Resume</h2>
-                <div class="space-y-8">
-                    <!-- Experience -->
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Experience</h3>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm space-y-4">
-                            <div class="border-b pb-4">
-                                <h4 class="text-lg font-semibold text-gray-800">Data Engineer @ PEXA</h4>
-                                <p class="text-sm text-gray-500">May 2023 - Current</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <li>I drove end-to-end product delivery by bridging the gap between business strategy and technical execution.</li>
-                                    <li>I led the development of scalable platforms and consistently optimized team performance, most notably by increasing delivery velocity by 80% and ensuring new products directly met business objectives.</li>
-                                    <li>I focused on building more efficient and reliable processes by mentoring teams, mitigating risk through automation, and implementing innovative solutions that accelerated our time-to-market.</li>
-                                </ul>
+        <div class="bg-[--white] rounded-xl card-shadow m-4 p-8">
+            <section id="resume">
+                <div class="container mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-[--dark-text]">Resume</h2>
+                    <div class="space-y-8">
+                        <!-- Experience -->
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Experience</h3>
+                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm space-y-4">
+                                <div class="pb-4">
+                                    <h4 class="text-lg font-bold text-[--dark-text]">
+                                        Data Engineer @ <a href="https://www.pexa.com.au/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">PEXA</a>
+                                    </h4>
+                                    <p class="text-sm text-gray-500">May 2023 - Current</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <li>I drove end-to-end product delivery by bridging the gap between business
+                                            strategy and technical execution.</li>
+                                        <li>I led the development of scalable platforms and consistently optimized team
+                                            performance, most notably by increasing delivery velocity by 80% and
+                                            ensuring
+                                            new products directly met business objectives.</li>
+                                        <li>I focused on building more efficient and reliable processes by mentoring
+                                            teams,
+                                            mitigating risk through automation, and implementing innovative solutions
+                                            that
+                                            accelerated our time-to-market.</li>
+                                        <li>I contributed significantly to the continuous improvement of the codebase by
+                                            writing and testing new features, and enhancing existing functionalities
+                                            with a
+                                            focus on performance and readability.</li>
+                                    </ul>
+                                </div>
+                                <div class="pb-4">
+                                    <h4 class="text-lg font-bold text-[--dark-text]">
+                                        Sofware Engineer, Data @ <a href="https://www.pexa.com.au/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">PEXA</a>
+                                    </h4>
+                                    <p class="text-sm text-gray-500">Aug 2022 - May 2023</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <li>I accelerated the team's growth and output by mentoring junior engineers
+                                            with
+                                            frequently targeted technical and business-context feedback.</li>
+                                        <li>I enabled the team to build and iterate faster using DRY principles by
+                                            introducing Storybook to streamlike UI component building and testing.</li>
+                                        <li>I collaborated with cross-functional teams to integrate data pipelines and
+                                            develop new features, ensuring seamless data flow and product functionality.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pb-4">
+                                    <h4 class="text-lg font-bold text-[--dark-text]">
+                                        Product Engineer @ <a href="https://matrak.com/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">Matrak</a>
+                                    </h4>
+                                    <p class="text-sm text-gray-500">Oct 2021 - Aug 2023</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <li>I enabled a new revenue stream by leading the end-to-end development of
+                                            Matrak's
+                                            first public-facing API suite, from defining business requirements to
+                                            launch.
+                                        </li>
+                                        <li>I enhanced the user experience, by collaborating with UX team using a
+                                            data-driven approach with user journey heatmaps.</li>
+                                        <li>I facilitated Agile ceremonies to provide the C-suite with clear,
+                                            data-driven
+                                            insights and ensure predictable project velocity.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-[--dark-text]">
+                                        Software Engineer @ <a href="https://www.xplortechnologies.com/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">Xplor</a>
+                                    </h4>
+                                    <p class="text-sm text-gray-500">Oct 2018 - Oct 2021</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <li>I delivered three core revenue-generating product suites that drove
+                                            significant
+                                            customer growth, from startup to scale-up.</li>
+                                        <li>I directly contributed to enhancing the customer experience, reducing
+                                            support
+                                            resolution time by 93%—from 30 days to less than 2, by building internal
+                                            APIs
+                                            and upskilling the customer support teams.</li>
+                                        <li>I contributed significantly ensuring consistent brand alignment and user
+                                            experience, by collaborating with the product team to build an internal
+                                            design
+                                            system from scratch.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-semibold text-gray-800">Sofware Engineer, Data @ PEXA</h4>
-                                <p class="text-sm text-gray-500">Aug 2022 - May 2023</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <li>I accelerated the team's growth and output by mentoring junior engineers with frequently targeted technical and business-context feedback.</li>
-                                    <li>I enabled the team to build and iterate faster using DRY principles by introducing Storybook to streamlike UI component building and testing.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold text-gray-800">Product Engineer @ Matrak</h4>
-                                <p class="text-sm text-gray-500">Oct 2021 - Aug 2023</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <li>I enabled a new revenue stream by leading the end-to-end development of Matrak's first public-facing API suite, from defining business requirements to launch.</li>
-                                    <li>I enhanced the user experience, by collaborating with UX team using a data-driven approach with user journey heatmaps.</li>
-                                    <li>I facilitated Agile ceremonies to provide the C-suite with clear, data-driven insights and ensure predictable project velocity.</li>
-                                </ul>
-                            </div> 
-                            <div>
-                                <h4 class="text-lg font-semibold text-gray-800">Software Engineer @ Xplor</h4>
-                                <p class="text-sm text-gray-500">Oct 2018 - Oct 2021</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <li>I delivered three core revenue-generating product suites that drove significant customer growth, from startup to scale-up.</li>
-                                    <li>I directly contributed to enhancing the customer experience, reducing support resolution time by 93%—from 30 days to less than 2, by building internal APIs and upskilling the customer support teams.</li>
-                                    <li>I contributed significantly ensuring consistent brand alignment and user experience, by collaborating with the product team to build an internal design system from scratch.</li>
-                                </ul>
-                            </div>   
-                            
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Initiatives</h3>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm space-y-4">
-                            <div class="border-b pb-4">
-                                <h4 class="text-lg font-semibold text-gray-800">Lead Educator @ CSinSchools</h4>
-                                <p class="text-sm text-gray-500">Jan 2020 - Jun 2020</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <p>I partnered with CSInSchools to mentor and upskill educators in coding fundamentals, while also teaching programming fundamentals to Year 7 and 8 students for two terms. I used gamification to increase student engagement and drive tangible learning outcomes.</p>
-                                </ul>
-                            </div>   
-                            <div class="border-b pb-4">
-                                <h4 class="text-lg font-semibold text-gray-800">E-commerce Consultant @ HypeNation AU</h4>
-                                <p class="text-sm text-gray-500">2020</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <p>I Drove a significant increase in conversions and revenue by automating a Shopify discount system and redesigning the landing page using Liquid.</p>
-                                </ul>
-                            </div>        
-                            <div class="border-b pb-4">
-                                <h4 class="text-lg font-semibold text-gray-800">E-commerce Developer @ Orbit Coffee AU</h4>
-                                <p class="text-sm text-gray-500">2020</p>
-                                <ul class="list-disc list-inside mt-2 text-gray-700">
-                                    <p>I enhanced UX and UI to align brand consistency by developing custom code solutions for various front-end Squarespace components.</p>
-                                </ul>
-                            </div>                                                                                  
                         </div>
-                    </div>
-                    <!-- Education -->
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Education</h3>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                            <h4 class="text-lg font-semibold text-gray-800">Diploma of IT | Coder Academy</h4>
-                            <p class="text-sm text-gray-500">Graduated 2018</p>                            
-                            <h4 class="text-lg font-semibold text-gray-800">Bachelor of Human Resource Management | Swinburne University of Technology</h4>
-                            <p class="text-sm text-gray-500">Graduated 2015</p>
+                        <div>
+                            <!-- Initatives -->
+                            <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Initiatives</h3>
+                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm space-y-4">
+                                <div class="pb-4">
+                                    <h4 class="text-lg font-bold text-[--dark-text]">Lead Educator @ <a href="https://csinschools.io/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">CSinSchools</a></h4>
+                                    <p class="text-sm text-gray-500">Jan 2020 - Jun 2020</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <p>I partnered with CSinSchools to mentor and upskill educators in coding
+                                            fundamentals, while also teaching programming fundamentals to Year 7 and 8
+                                            students for two terms. I used gamification to increase student engagement
+                                            and
+                                            drive tangible learning outcomes.</p>
+                                    </ul>
+                                </div>
+                                <div class="pb-4">
+                                    <h4 class="text-lg font-bold text-[--dark-text]">E-commerce Consultant @ <a href="https://www.hype-nation.com.au/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">HypeNation AU</a>
+                                    </h4>
+                                    <p class="text-sm text-gray-500">2020</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <p>I Drove a significant increase in conversions and revenue by automating a
+                                            Shopify
+                                            discount system and redesigning the landing page using Liquid.</p>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-[--dark-text]">E-commerce Developer @ <a href="https://drinkorbit.com/" target="_blank" rel="noopener noreferrer"
+                                            class="company-link">Orbit Coffee
+                                        AU</a>
+                                    </h4>
+                                    <p class="text-sm text-gray-500">2020</p>
+                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                        <p>I enhanced UX and UI to align brand consistency by developing custom code
+                                            solutions for various front-end Squarespace components.</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Education -->
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Education</h3>
+                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
+                                <h4 class="text-lg font-bold text-[--dark-text]">Diploma of IT | Coder Academy</h4>
+                                <p class="text-sm text-gray-500">Graduated 2018</p>
+                                <h4 class="text-lg font-bold text-[--dark-text]">Bachelor of Human Resource Management |
+                                    Swinburne University of Technology</h4>
+                                <p class="text-sm text-gray-500">Graduated 2015</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="bg-[--white] rounded-xl card-shadow m-4 p-8">
+            <section id="contact">
+                <div class="container mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-8 text-[--dark-text]">Connect With Me</h2>
+                    <p class="text-lg text-[--medium-text] mb-4">You can find me on LinkedIn:</p>
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
+                        class="inline-block px-8 py-3 custom-btn rounded-full font-semibold shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
+                        <span class="text-white">LinkedIn Profile</span>
+                    </a>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -188,4 +359,5 @@
         });
     </script>
 </body>
+
 </html>
