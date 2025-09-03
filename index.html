@@ -13,25 +13,58 @@
     <!-- Inline your custom CSS -->
     <style>
         :root {
-            /* Vibrant theme palette */
-            --light-bg: #F0F4F8;
+            /* Light theme palette */
+            --light-bg: #F5F5F5;
             --white: #FFFFFF;
-            --light-gray: #EBEFF5;
+            --light-gray: #EAEAEA;
             --dark-text: #374151;
             --medium-text: #6B7280;
+            --pure-black: #000000;
+            --nav-bg: var(--white);
+            --nav-text: #6B7280;
+            --nav-text-hover: #374151;
+            --nav-brand: #374151;
+            --link-color: #3b82f6;
+            --link-hover: #4B5563;
         }
+
+        body.dark {
+            /* Dark theme palette */
+            --light-bg: #121212;
+            --white: #222222;
+            --light-gray: #333333;
+            --dark-text: #E5E7EB;
+            /* Brighter text for better contrast (gray-200) */
+            --medium-text: #D1D5DB;
+            /* Brighter text for better contrast (gray-300) */
+            --nav-bg: #222222;
+            --nav-text: #E5E7EB;
+            /* Matching dark text for better contrast */
+            --nav-text-hover: #E2E8F0;
+            --nav-brand: var(--dark-text);
+            --link-color: #ff9a48;
+            /* Orange for company links */
+            --link-hover: #ff8c2b;
+            /* Slightly darker orange on hover */
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light-bg);
             color: var(--dark-text);
             text-align: left;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
+
         /* New rule for headings */
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: var(--dark-text);
         }
-        
+
         .container {
             max-width: 960px;
         }
@@ -42,17 +75,25 @@
 
         .navbar-link {
             transition: color 0.3s ease-in-out;
+            color: var(--nav-text);
         }
 
         .navbar-link:hover {
-            color: #4a5568;
+            color: var(--nav-text-hover);
         }
 
         .custom-btn {
             /* Button color is now a professional dark gray */
             background-color: #374151;
-            color: #FFFFFF; /* White text for better readability */
+            color: #FFFFFF;
+            /* White text for better readability */
             transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        body.dark .custom-btn {
+            background-color: #ff9a48;
+            /* Orange color from user's hex code */
+            color: #FFFFFF;
         }
 
         .custom-btn:hover {
@@ -61,39 +102,72 @@
             transform: scale(1.05) translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+
+        body.dark .custom-btn:hover {
+            background-color: #ff8c2b;
+            /* Slightly darker orange on hover */
+        }
+
         /* Custom, more aggressive shadow for content cards */
         .card-shadow {
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -5px rgba(0, 0, 0, 0.05);
+            box-shadow: 15px 30px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark .card-shadow {
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.3), 0 5px 15px -5px rgba(0, 0, 0, 0.2);
         }
 
         /* Style for company links, now with a professional hover effect */
         a.company-link {
-            color: #3b82f6;
+            color: var(--link-color);
             text-decoration: underline;
+            transition: color 0.3s ease-in-out;
         }
 
         a.company-link:hover {
-            color: #4B5563; /* New hover color to match the button */
+            color: var(--link-hover);
         }
-        
-
     </style>
 </head>
 
-<body class="bg-[--light-bg] text-gray-800 leading-relaxed">
+<body class="dark bg-[--light-bg] text-gray-800 leading-relaxed">
 
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 shadow-md fixed top-0 w-full z-10">
+    <nav class="bg-[--nav-bg] shadow-md fixed top-0 w-full z-10">
         <div class="container mx-auto px-4 py-4 flex flex-col items-center md:flex-row md:justify-between">
-            <a href="#home" class="text-2xl md:text-3xl font-extrabold text-white mb-2 md:mb-0">MENG LIM</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#home" class="text-gray-200 hover:text-white transition duration-300 font-bold">Home</a>
-                <a href="#about" class="text-gray-200 hover:text-white transition duration-300 font-bold">About</a>
-                <a href="#resume" class="text-gray-200 hover:text-white transition duration-300 font-bold">Resume</a>
-                <a href="#contact" class="text-gray-200 hover:text-white transition duration-300 font-bold">LinkedIn</a>
+            <a href="#home" class="text-[--nav-brand] text-2xl md:text-3xl font-extrabold mb-2 md:mb-0">MENG LIM</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <!-- Theme toggle button moved to the left -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
+                    <!-- Simpler Sun SVG -->
+                    <svg id="sun-icon" class="w-6 h-6 text-yellow-500" fill="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" stroke-width="2" />
+                        <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="2" />
+                        <line x1="2" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2" />
+                        <line x1="20" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <!-- Simpler Moon SVG -->
+                    <svg id="moon-icon" class="w-6 h-6 text-gray-400" fill="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.68 15.65a9 9 0 01-10.16 3.82 9.01 9.01 0 01-1.37-14.71 10.5 10.5 0 0011.53 10.89z" />
+                    </svg>
+                </button>
+                <a href="#home" class="navbar-link transition duration-300 font-bold">Home</a>
+                <a href="#about" class="navbar-link transition duration-300 font-bold">About</a>
+                <a href="#resume" class="navbar-link transition duration-300 font-bold">Resume</a>
+                <a href="#contact" class="navbar-link transition duration-300 font-bold">LinkedIn</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="menu-button" class="md:hidden text-gray-200 hover:text-white focus:outline-none">
+            <button id="menu-button"
+                class="md:hidden text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
@@ -102,11 +176,15 @@
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-lg text-center">
-            <a href="#home" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">Home</a>
-            <a href="#about" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">About</a>
-            <a href="#resume" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">Resume</a>
-            <a href="#contact" class="block py-3 px-4 text-gray-200 hover:bg-gray-700 font-bold">LinkedIn</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-[--nav-bg] shadow-lg text-center">
+            <a href="#home"
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Home</a>
+            <a href="#about"
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">About</a>
+            <a href="#resume"
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Resume</a>
+            <a href="#contact"
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">LinkedIn</a>
         </div>
     </nav>
 
@@ -118,8 +196,8 @@
                     <img src="https://placehold.co/150x150/d1d5db/000000?text=Meng" alt="Profile Picture"
                         class="w-36 h-36 rounded-full mx-auto mb-6 object-cover">
                     <h2 class="text-4xl md:text-6xl font-extrabold text-[--dark-text] mb-2">Hello, I'm Meng</h2>
-                    <div class="mt-4 max-w-xl mx-auto p-6 rounded-lg">
-                        <p class="text-lg text-gray-600">Drawing on my background in software and data, I'm passionate
+                    <div class="mt-4 max-w-xl mx-auto p-6 rounded-lg text-[--medium-text]">
+                        <p class="text-lg">Drawing on my background in software and data, I'm passionate
                             about collaborating with teams as a Technical Product Owner to tackle real-world problems
                             and build products that truly matter.</p>
                     </div>
@@ -137,33 +215,33 @@
                     <h2 class="text-3xl font-bold text-center mb-8 text-[--dark-text]">About Me</h2>
                     <div class="space-y-8">
                         <!-- 9am-5pm Section -->
-                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
-                            <h3 class="text-xl font-bold mb-2">9am-5pm</h3>
-                            <p class="text-[--medium-text]">I am a full-stack developer with a passion for creating beautiful
+                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm text-[--medium-text]">
+                            <h3 class="text-xl font-bold mb-2 text-[--dark-text]">9am-5pm</h3>
+                            <p>I am a full-stack developer with a passion for creating beautiful
                                 and functional web applications. I have experience with JavaScript, React, Node.js, and
                                 modern CSS frameworks. My goal is to build accessible and user-friendly products that
                                 solve real-world problems.</p>
                         </div>
                         <!-- 5pm-9pm Section -->
-                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
-                            <h3 class="text-xl font-bold mb-2">5pm-9pm</h3>
-                            <ul class="list-disc list-inside space-y-2 text-[--medium-text]">
-                                <li class="dot-red">Currently building a fitwear brand🏋🏽</li>
-                                <li class="dot-orange">Foodie that also loves to cook 🍣</li>
-                                <li class="dot-green">Always down for a camping trip 🔥</li>
-                                <li class="dot-blue">Judoka 🥋</li>
+                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm text-[--medium-text]">
+                            <h3 class="text-xl font-bold mb-2 text-[--dark-text]">5pm-9pm</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Currently building a fitwear brand🏋🏽</li>
+                                <li>Foodie that also loves to cook 🍣</li>
+                                <li>Always down for a camping trip 🔥</li>
+                                <li>Judoka 🥋</li>
                             </ul>
                         </div>
                         <!-- Stack Section -->
-                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
-                            <h3 class="text-xl font-bold mb-2">Stack</h3>
-                            <ul class="list-disc list-inside space-y-2 text-[--medium-text]">
-                                <li class="dot-teal"><strong>Frontend:</strong> HTML, CSS, JavaScript, React</li>
-                                <li class="dot-dark-blue"><strong>Backend:</strong> Elixir, Node.js, Python, SQL</li>
-                                <li class="dot-purple"><strong>Cloud/Infra:</strong> AWS, CI/CD, Iac, Docker</li>
-                                <li class="dot-lime"><strong>SaaS:</strong> AWS, Snowflake, DBT, Canva, Figma, Miro, Looker</li>
+                        <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm text-[--medium-text]">
+                            <h3 class="text-xl font-bold mb-2 text-[--dark-text]">Stack</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><strong>Frontend:</strong> HTML, CSS, JavaScript, React</li>
+                                <li><strong>Backend:</strong> Elixir, Node.js, Python, SQL</li>
+                                <li><strong>Cloud/Infra:</strong> AWS, CI/CD, Iac, Docker</li>
+                                <li><strong>SaaS:</strong> AWS, Snowflake, DBT, Canva, Figma, Miro, Looker</li>
                             </ul>
-                            <p class="mt-2 text-[--medium-text]">Advocate for leveraging AI toolings</p>
+                            <p class="mt-2">Advocate for leveraging AI toolings</p>
                         </div>
                     </div>
                 </div>
@@ -179,14 +257,14 @@
                         <!-- Experience -->
                         <div>
                             <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Experience</h3>
-                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm space-y-4">
+                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm space-y-4 text-[--medium-text]">
                                 <div class="pb-4">
                                     <h4 class="text-lg font-bold text-[--dark-text]">
-                                        Data Engineer @ <a href="https://www.pexa.com.au/" target="_blank" rel="noopener noreferrer"
-                                            class="company-link">PEXA</a>
+                                        Data Engineer @ <a href="https://www.pexa.com.au/" target="_blank"
+                                            rel="noopener noreferrer" class="company-link">PEXA</a>
                                     </h4>
-                                    <p class="text-sm text-gray-500">May 2023 - Current</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">May 2023 - Current</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <li>I drove end-to-end product delivery by bridging the gap between business
                                             strategy and technical execution.</li>
                                         <li>I led the development of scalable platforms and consistently optimized team
@@ -206,11 +284,11 @@
                                 </div>
                                 <div class="pb-4">
                                     <h4 class="text-lg font-bold text-[--dark-text]">
-                                        Sofware Engineer, Data @ <a href="https://www.pexa.com.au/" target="_blank" rel="noopener noreferrer"
-                                            class="company-link">PEXA</a>
+                                        Sofware Engineer, Data @ <a href="https://www.pexa.com.au/" target="_blank"
+                                            rel="noopener noreferrer" class="company-link">PEXA</a>
                                     </h4>
-                                    <p class="text-sm text-gray-500">Aug 2022 - May 2023</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">Aug 2022 - May 2023</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <li>I accelerated the team's growth and output by mentoring junior engineers
                                             with
                                             frequently targeted technical and business-context feedback.</li>
@@ -223,11 +301,11 @@
                                 </div>
                                 <div class="pb-4">
                                     <h4 class="text-lg font-bold text-[--dark-text]">
-                                        Product Engineer @ <a href="https://matrak.com/" target="_blank" rel="noopener noreferrer"
-                                            class="company-link">Matrak</a>
+                                        Product Engineer @ <a href="https://matrak.com/" target="_blank"
+                                            rel="noopener noreferrer" class="company-link">Matrak</a>
                                     </h4>
-                                    <p class="text-sm text-gray-500">Oct 2021 - Aug 2023</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">Oct 2021 - Aug 2023</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <li>I enabled a new revenue stream by leading the end-to-end development of
                                             Matrak's
                                             first public-facing API suite, from defining business requirements to
@@ -242,11 +320,11 @@
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-bold text-[--dark-text]">
-                                        Software Engineer @ <a href="https://www.xplortechnologies.com/" target="_blank" rel="noopener noreferrer"
-                                            class="company-link">Xplor</a>
+                                        Software Engineer @ <a href="https://www.xplortechnologies.com/" target="_blank"
+                                            rel="noopener noreferrer" class="company-link">Xplor</a>
                                     </h4>
-                                    <p class="text-sm text-gray-500">Oct 2018 - Oct 2021</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">Oct 2018 - Oct 2021</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <li>I delivered three core revenue-generating product suites that drove
                                             significant
                                             customer growth, from startup to scale-up.</li>
@@ -266,12 +344,13 @@
                         <div>
                             <!-- Initatives -->
                             <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Initiatives</h3>
-                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm space-y-4">
+                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm space-y-4 text-[--medium-text]">
                                 <div class="pb-4">
-                                    <h4 class="text-lg font-bold text-[--dark-text]">Lead Educator @ <a href="https://csinschools.io/" target="_blank" rel="noopener noreferrer"
+                                    <h4 class="text-lg font-bold text-[--dark-text]">Lead Educator @ <a
+                                            href="https://csinschools.io/" target="_blank" rel="noopener noreferrer"
                                             class="company-link">CSinSchools</a></h4>
-                                    <p class="text-sm text-gray-500">Jan 2020 - Jun 2020</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">Jan 2020 - Jun 2020</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <p>I partnered with CSinSchools to mentor and upskill educators in coding
                                             fundamentals, while also teaching programming fundamentals to Year 7 and 8
                                             students for two terms. I used gamification to increase student engagement
@@ -280,23 +359,25 @@
                                     </ul>
                                 </div>
                                 <div class="pb-4">
-                                    <h4 class="text-lg font-bold text-[--dark-text]">E-commerce Consultant @ <a href="https://www.hype-nation.com.au/" target="_blank" rel="noopener noreferrer"
-                                            class="company-link">HypeNation AU</a>
+                                    <h4 class="text-lg font-bold text-[--dark-text]">E-commerce Consultant @ <a
+                                            href="https://www.hype-nation.com.au/" target="_blank"
+                                            rel="noopener noreferrer" class="company-link">HypeNation AU</a>
                                     </h4>
-                                    <p class="text-sm text-gray-500">2020</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">2020</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <p>I Drove a significant increase in conversions and revenue by automating a
                                             Shopify
                                             discount system and redesigning the landing page using Liquid.</p>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h4 class="text-lg font-bold text-[--dark-text]">E-commerce Developer @ <a href="https://drinkorbit.com/" target="_blank" rel="noopener noreferrer"
+                                    <h4 class="text-lg font-bold text-[--dark-text]">E-commerce Developer @ <a
+                                            href="https://drinkorbit.com/" target="_blank" rel="noopener noreferrer"
                                             class="company-link">Orbit Coffee
-                                        AU</a>
+                                            AU</a>
                                     </h4>
-                                    <p class="text-sm text-gray-500">2020</p>
-                                    <ul class="list-disc list-inside mt-2 text-[--medium-text]">
+                                    <p class="text-sm text-[--medium-text]">2020</p>
+                                    <ul class="list-disc list-inside mt-2">
                                         <p>I enhanced UX and UI to align brand consistency by developing custom code
                                             solutions for various front-end Squarespace components.</p>
                                     </ul>
@@ -306,12 +387,12 @@
                         <!-- Education -->
                         <div>
                             <h3 class="text-2xl font-bold mb-4 text-[--dark-text]">Education</h3>
-                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm">
+                            <div class="bg-[--light-gray] p-6 rounded-lg shadow-sm text-[--medium-text]">
                                 <h4 class="text-lg font-bold text-[--dark-text]">Diploma of IT | Coder Academy</h4>
-                                <p class="text-sm text-gray-500">Graduated 2018</p>
+                                <p class="text-sm text-[--medium-text]">Graduated 2018</p>
                                 <h4 class="text-lg font-bold text-[--dark-text]">Bachelor of Human Resource Management |
                                     Swinburne University of Technology</h4>
-                                <p class="text-sm text-gray-500">Graduated 2015</p>
+                                <p class="text-sm text-[--medium-text]">Graduated 2015</p>
                             </div>
                         </div>
                     </div>
@@ -335,14 +416,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-6 mt-8 shadow-inner">
+    <footer class="bg-gray-800 dark:bg-[--nav-bg] text-white text-center py-6 mt-8 shadow-inner">
         <p>&copy; 2025 Meng Lim. All rights reserved.</p>
     </footer>
 
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
@@ -356,6 +437,43 @@
 
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dark mode functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Function to update icon visibility
+        function updateIconVisibility() {
+            if (body.classList.contains('dark')) {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        // Initial theme check and setup
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.remove('dark');
+        } else {
+            body.classList.add('dark');
+        }
+        updateIconVisibility();
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+            updateIconVisibility();
         });
     </script>
 </body>
