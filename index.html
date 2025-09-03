@@ -171,62 +171,38 @@
 <body class="dark bg-[--secondary-bg] text-gray-800 leading-relaxed">
 
     <!-- Navigation Bar -->
-    <nav class="bg-[--nav-bg] shadow-md fixed top-0 w-full z-10">
-        <div class="container mx-auto px-4 py-4 flex flex-col items-center md:flex-row md:justify-between">
-            <a href="#home" class="text-[--nav-brand] text-2xl md:text-3xl font-extrabold mb-2 md:mb-0">MENG LIM</a>
-            <div class="hidden md:flex space-x-6 items-center">
-                <!-- Theme toggle button moved to the left -->
-                <button id="theme-toggle"
-                    class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
-                    <!-- Simpler Sun SVG -->
-                    <svg id="sun-icon" class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="5" />
-                        <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" stroke-width="2" />
-                        <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="2" />
-                        <line x1="2" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2" />
-                        <line x1="20" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" />
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" />
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" />
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" />
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" />
-                    </svg>
-                    <!-- Simpler Moon SVG -->
-                    <svg id="moon-icon" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.68 15.65a9 9 0 01-10.16 3.82 9.01 9.01 0 01-1.37-14.71 10.5 10.5 0 0011.53 10.89z" />
-                    </svg>
-                </button>
-                <a href="#home" class="navbar-link transition duration-300 font-bold">Home</a>
-                <a href="#about" class="navbar-link transition duration-300 font-bold">About</a>
-                <a href="#toolkit" class="navbar-link transition duration-300 font-bold">Toolkit</a>
-                <a href="#work" class="navbar-link transition duration-300 font-bold">Work</a>
-                <a href="#contact" class="navbar-link transition duration-300 font-bold">LinkedIn</a>
-            </div>
+<nav class="bg-[--nav-bg] shadow-md fixed top-0 w-full z-10">
+    <div class="container mx-auto px-4 py-4 flex flex-col items-center md:flex-row md:justify-between">
+        <a href="#home" class="text-[--nav-brand] text-2xl md:text-3xl font-extrabold mb-2 md:mb-0">MENG LIM</a>
+        <!-- This div is only visible on mobile -->
+        <div class="flex items-center space-x-6 md:hidden">
+            <!-- Theme toggle button for mobile -->
+            <button id="theme-toggle"
+                class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
+                <!-- SVG icons here... -->
+            </button>
             <!-- Mobile Menu Button -->
             <button id="menu-button"
                 class="md:hidden text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
-                    </path>
-                </svg>
+                <!-- SVG icons here... -->
             </button>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[--nav-bg] shadow-lg text-center">
-            <a href="#home"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Home</a>
-            <a href="#about"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">About</a>
-            <a href="#toolkit"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Toolkit</a>
-            <a href="#work"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Work</a>
-            <a href="#contact"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">LinkedIn</a>
+        <!-- This div is only visible on desktop -->
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="#home" class="navbar-link transition duration-300 font-bold">Home</a>
+            <!-- Other navigation links -->
+            <!-- Theme toggle button for desktop -->
+            <button id="desktop-theme-toggle"
+                class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
+                <!-- SVG icons here... -->
+            </button>
         </div>
-    </nav>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[--nav-bg] shadow-lg text-center">
+        <!-- Mobile links here... -->
+    </div>
+</nav>
 
     <main class="pt-20">
         <!-- Home Section -->
