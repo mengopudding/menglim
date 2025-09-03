@@ -624,12 +624,12 @@
 
         // Initial theme check and setup
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
+        if (savedTheme === 'dark') {
             body.classList.remove('dark');
-            updateIconVisibility(false);
+            updateIconVisibility(true);
         } else {
             body.classList.add('dark');
-            updateIconVisibility(true);
+            updateIconVisibility(false);
         }
 
         // Toggle theme on button click
@@ -701,10 +701,6 @@
             },
             'orbit-coffee-c': {
                 title: 'E-commerce Developer at Orbit Coffee AU',
-                items: [
-                    'https://placehold.co/400x250/cccccc/333333?text=Project+Mockup+1',
-                    'https://placehold.co/400x250/cccccc/333333?text=Project+Mockup+2'
-                ],
                 media: [
                     'assets/logos/media/orbitcoffee/orbitcoffee_mobile.jpeg',
                     'assets/logos/media/orbitcoffee/orbotcoffee_insta.jpeg'
