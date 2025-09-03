@@ -177,6 +177,17 @@
             max-height: 500px;
             /* A value larger than the menu's height */
         }
+
+        /* New styles for active navigation links */
+        .mobile-menu-link.active-link {
+            background-color: var(--accent-color);
+            color: #FFFFFF !important; /* Use !important to override other link colors */
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .navbar-link.active-link {
+            color: var(--accent-color); /* Highlight the text color in desktop nav */
+            font-weight: 700; /* Bolder text for emphasis */
+        }
     </style>
 </head>
 
@@ -268,15 +279,15 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="mobile-menu-transition md:hidden bg-[--nav-bg] shadow-lg text-center">
             <a href="#home"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Home</a>
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold mobile-menu-link">Home</a>
             <a href="#about"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">About</a>
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold mobile-menu-link">About</a>
             <a href="#toolkit"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Toolkit</a>
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold mobile-menu-link">Toolkit</a>
             <a href="#work"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">Work</a>
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold mobile-menu-link">Work</a>
             <a href="#contact"
-                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold">LinkedIn</a>
+                class="block py-3 px-4 navbar-link hover:bg-gray-100 dark:hover:bg-gray-700 font-bold mobile-menu-link">LinkedIn</a>
         </div>
     </nav>
 
@@ -609,9 +620,16 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                const href = this.getAttribute('href');
+                document.querySelector(href).scrollIntoView({
                     behavior: 'smooth'
                 });
+                // Auto-close the mobile menu on link click
+                if (window.innerWidth < 768) {
+                    closeMobileMenu();
+                }
+                // Update active link immediately after click
+                updateActiveLink();
             });
         });
 
@@ -621,11 +639,69 @@
         const menuOpenIcon = document.querySelector('.menu-open-icon');
         const menuCloseIcon = document.querySelector('.menu-close-icon');
 
-        menuButton.addEventListener('click', () => {
+        function closeMobileMenu() {
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
+            }
+        }
+
+        function toggleMobileMenu() {
             const isOpen = mobileMenu.classList.toggle('open');
             menuOpenIcon.classList.toggle('hidden', isOpen);
             menuCloseIcon.classList.toggle('hidden', !isOpen);
+        }
+
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent the body click from immediately closing the menu
+            toggleMobileMenu();
         });
+        
+        // Add a click listener to the body to close the menu when clicking outside
+        document.body.addEventListener('click', (e) => {
+            const isMenuOpen = mobileMenu.classList.contains('open');
+            const isClickInsideMenu = mobileMenu.contains(e.target) || menuButton.contains(e.target);
+            if (isMenuOpen && !isClickInsideMenu) {
+                closeMobileMenu();
+            }
+        });
+
+        // Function to update the active navigation link based on scroll position
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let currentActive = null;
+            // Iterate through sections from bottom up to handle overlap
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                const rect = section.getBoundingClientRect();
+                
+                // Check if the section is in the viewport (with a small offset)
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    currentActive = section.id;
+                    break;
+                }
+            }
+            
+            // Remove active class from all links
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+            });
+            
+            // Add active class to the corresponding link
+            if (currentActive) {
+                const activeLink = document.querySelector(`nav a[href="#${currentActive}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active-link');
+                }
+            }
+        }
+
+        // Add event listeners for scroll and load
+        window.addEventListener('scroll', updateActiveLink);
+        window.addEventListener('load', updateActiveLink);
 
         // Dark mode functionality
         const themeToggle = document.getElementById('theme-toggle');
