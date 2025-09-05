@@ -1,7 +1,25 @@
+
+
 import { useState, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+
 import './index.css';
 
-const projectData = [
+
+// Define the types for the data structures to satisfy TypeScript.
+interface ProjectImage {
+  src: string;
+  caption: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  images: ProjectImage[];
+}
+
+const projectData: Project[] = [
   {
     id: 'hype-nation',
     title: 'Hype Nation AU',
@@ -34,7 +52,7 @@ const projectData = [
 ];
 
 // Reusable modal component for project details.
-const ProjectModal = ({ project, onClose, darkMode }) => {
+const ProjectModal = ({ project, onClose, darkMode }: { project: Project, onClose: () => void, darkMode: boolean }) => {
   if (!project) return null;
 
   return (
@@ -56,7 +74,7 @@ const ProjectModal = ({ project, onClose, darkMode }) => {
           <h2 className={`text-4xl md:text-5xl font-black mb-4 ${darkMode ? 'text-[#ff6b6b]' : 'text-black'}`}>{project.title}</h2>
           <p className={`text-lg mb-8 ${darkMode ? 'text-white opacity-75' : 'text-black opacity-75'}`}>{project.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {project.images.map((image, index) => (
+            {project.images.map((image: ProjectImage, index: number) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="w-full flex items-center justify-center rounded-lg overflow-hidden h-full">
                   <img
@@ -87,8 +105,8 @@ const App = () => {
   });
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
-  const headerRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -97,11 +115,11 @@ const App = () => {
 
   // State for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const aboutRef = useRef(null);
-  const workRef = useRef(null);
-  const contactRef = useRef(null);
+  const aboutRef = useRef<HTMLElement>(null);
+  const workRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -115,8 +133,10 @@ const App = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target) && isMenuOpen) {
+    // Correctly type the event object
+    const handleClickOutside = (event: globalThis.MouseEvent) => {
+      // Use a type guard and ensure the target is a Node before using contains
+      if (menuRef.current && !menuRef.current.contains(event.target as Node) && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
@@ -132,7 +152,6 @@ const App = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
 
-      // Use modern optional chaining and nullish coalescing for safety
       const headerHeight = headerRef.current?.offsetHeight ?? 0;
       const offset = headerHeight + 50;
 
@@ -144,21 +163,20 @@ const App = () => {
 
       let currentActive = 'home';
 
-      // Robust check for the very bottom of the page
       if (scrollPosition + viewportHeight >= totalHeight - 10) {
         currentActive = 'contact';
-      } else if (contactRef.current && scrollPosition >= contactTop - offset) {
+      } else if (contactRef.current && contactTop && scrollPosition >= contactTop - offset) {
         currentActive = 'contact';
-      } else if (workRef.current && scrollPosition >= workTop - offset) {
+      } else if (workRef.current && workTop && scrollPosition >= workTop - offset) {
         currentActive = 'work';
-      } else if (aboutRef.current && scrollPosition >= aboutTop - offset) {
+      } else if (aboutRef.current && aboutTop && scrollPosition >= aboutTop - offset) {
         currentActive = 'about';
       }
 
       setActiveSection(currentActive);
 
-      // Function to check if a section is in the viewport and set its state
-      const checkSectionVisibility = (ref, setState) => {
+      // Fix: Updated the type of 'ref' to include 'null'
+      const checkSectionVisibility = (ref: RefObject<HTMLElement | null>, setState: (value: boolean) => void) => {
         if (ref.current) {
           const rect = ref.current.getBoundingClientRect();
           setState(rect.top < window.innerHeight / 1.5);
@@ -179,7 +197,7 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
-  const scrollToSection = (section) => {
+  const scrollToSection = (section: string) => {
     const element = document.getElementById(section);
     const headerHeight = headerRef.current?.offsetHeight ?? 0;
     if (element) {
@@ -193,7 +211,7 @@ const App = () => {
     }
   };
 
-  const handleViewMore = (project) => {
+  const handleViewMore = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -202,7 +220,8 @@ const App = () => {
     <>
       {/* Google Fonts link for Poppins */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+      {/* Corrected the crossOrigin attribute from "true" to "anonymous" */}
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
 
       {/* Main container with gradient background */}
@@ -457,7 +476,7 @@ const App = () => {
         {/* Project Modal */}
         {isModalOpen && (
           <ProjectModal
-            project={selectedProject}
+            project={selectedProject as Project} // Cast as Project to satisfy TypeScript
             onClose={() => setIsModalOpen(false)}
             darkMode={darkMode}
           />
