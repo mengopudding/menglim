@@ -53,16 +53,16 @@ const ProjectModal = ({ project, onClose, darkMode }) => {
           &times;
         </button>
         <div className="p-8">
-          <h2 className={`text-4xl md:text-5xl font-black mb-4 ${darkMode ? 'text-[#ff6b6b]' : 'text-[#ff6b6b]'}`}>{project.title}</h2>
+          <h2 className={`text-4xl md:text-5xl font-black mb-4 ${darkMode ? 'text-[#ff6b6b]' : 'text-black'}`}>{project.title}</h2>
           <p className={`text-lg mb-8 ${darkMode ? 'text-white opacity-75' : 'text-black opacity-75'}`}>{project.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             {project.images.map((image, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="h-96 w-full flex items-center justify-center rounded-lg overflow-hidden">
+                <div className="w-full flex items-center justify-center rounded-lg overflow-hidden h-full">
                   <img
                     src={image.src}
                     alt={image.caption}
-                    className="w-full h-full object-contain rounded-lg shadow-md"
+                    className="w-full h-auto object-contain rounded-lg shadow-md"
                   />
                 </div>
                 <p className="text-sm italic opacity-75 text-center mt-2">{image.caption}</p>
