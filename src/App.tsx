@@ -23,10 +23,10 @@ const projectData: Project[] = [
     title: 'Hype Nation AU',
     description: 'Hype Nation is a Melbourne-based brand that specializes in car accessories and apparel inspired by Japanese pop culture and car culture. Founded in 2020 by a duo who were passionate about JDM (Japanese Domestic Market) cars, they offer a variety of products, from air fresheners and stickers to keychains and banners.',
     images: [
-      { src: 'public/assets/media/hn/HN_landing_hero.png', caption: "Founder's vision executed" },
-      { src: 'public/assets/media/hn/HN_products.png', caption: 'Much cleaner display of the products' },
-      { src: 'public/assets/media/hn/HN_sale.png', caption: 'Discount pills and savings calculated' },
-      { src: 'public/assets/media/hn/HN_footer.png', caption: 'Footer section to share the vision' }
+      { src: '/assets/media/hn/HN_landing_hero.png', caption: "Founder's vision executed" },
+      { src: '/assets/media/hn/HN_products.png', caption: 'Much cleaner display of the products' },
+      { src: '/assets/media/hn/HN_sale.png', caption: 'Discount pills and savings calculated' },
+      { src: '/assets/media/hn/HN_footer.png', caption: 'Footer section to share the vision' }
 
     ],
   },
@@ -35,8 +35,8 @@ const projectData: Project[] = [
     title: 'Orbit Coffee AU',
     description: "Orbit Coffee is a business that showcases and sells a curated selection of the season's best coffee beans sourced from various roasters across Melbourne. In addition to the beans, they also offer coffee accessories, including coffee makers, and provide different grind options for their customers",
     images: [
-      { src: 'public/assets/media/orbitcoffee/orbitcoffee_mobile.jpeg', caption: "Get responsive design to work with custom icons and graphical assets designed by the Owner -- Site is no longer live, Orbit Coffee AU now operates explicity via their instagram page." },
-      { src: 'public/assets/media/orbitcoffee/orbitcoffee_insta.png', caption: 'Scaling well on social media, surpassed the 300 followers milestone'},
+      { src: '/assets/media/orbitcoffee/orbitcoffee_mobile.jpeg', caption: "Get responsive design to work with custom icons and graphical assets designed by the Owner -- Site is no longer live, Orbit Coffee AU now operates explicity via their instagram page." },
+      { src: '/assets/media/orbitcoffee/orbitcoffee_insta.png', caption: 'Scaling well on social media, surpassed the 300 followers milestone'},
     ],
   },
   {
@@ -330,7 +330,7 @@ const App = () => {
           {/* Profile Picture */}
           <div className="my-12">
             <img
-              src="public/assets\media\profile_dp.jpeg"
+              src="/assets\media\profile_dp.jpeg"
               alt="Profile Picture"
               className={`rounded-full w-48 h-48 object-cover border-4 border-current mx-auto shadow-xl ${darkMode ? 'shadow-black/50' : 'shadow-gray-400'}`}
             />
