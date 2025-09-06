@@ -10,6 +10,8 @@ Running locally
 
 ## Deploying
 
+1. Commit your code to `main`
+
 1. Build the dist for gh pages to serve
 
 `npm run build` 

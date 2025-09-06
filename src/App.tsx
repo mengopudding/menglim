@@ -3,7 +3,6 @@ import type { RefObject } from 'react';
 
 import './index.css';
 
-
 // Define the types for the data structures to satisfy TypeScript.
 interface ProjectImage {
   src: string;
@@ -336,8 +335,8 @@ const App = () => {
             />
           </div>
           {/* Headline Section */}
-          <div className="mb-12 px-4 md:px-0">
-            <h2 className={`text-3xl md:text-4xl font-black opacity-75 text-center font-poppins`}>
+          <div className="mb-6 md:mb-12 px-4 md:px-0">
+            <h2 className={`text-xl sm:text-2xl md:text-4xl font-black opacity-75 text-center font-poppins`}>
               People-First | Engineer | Architect
             </h2>
           </div>
@@ -347,7 +346,7 @@ const App = () => {
         <section
           id="about"
           ref={aboutRef}
-          className={`px-8 py-16 md:p-24 transition-opacity duration-700 transform ${showAbout ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          className={`px-8 py-8 md:p-24 transition-opacity duration-700 transform ${showAbout ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
           <h2 className={`text-4xl md:text-6xl font-black mb-10 leading-tight text-center ${darkMode ? 'text-[#ff6b6b]' : ''} font-poppins`}>About Me</h2>
           <h3 className={`text-2xl md:text-3xl font-semibold mb-4 leading-tight max-w-4xl mx-auto text-left ${darkMode ? 'text-white opacity-100' : 'text-black opacity-75'} font-poppins`}>My Professional Craft</h3>
